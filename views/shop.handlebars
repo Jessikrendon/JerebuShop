@@ -1,0 +1,44 @@
+<section id="shop">
+    <!-- FILTRO DE LA DISCOGRAFÍA -->
+    <section id="filters">
+        <ul class="filter categories">
+            <h1 class="title">Categories</h1>
+            <li>Stickers</li>
+            <li>Posters</li>
+            <li>Comics</li>
+        </ul>
+        <ul class="filter price">
+            <h1 class="title">Price Range</h1>
+            <li>$1 - $12</li>
+            <li>$13 - $20</li>
+            <li>$21 - $30</li>
+        </ul>
+        <ul class="filter year">
+            <h1 class="title">Year Ion</h1>
+            <li>2017</li>
+            <li>2018</li>
+            <li>2019</li>
+        </ul>
+        <ul class="filter order">
+            <h1 class="title">Order</h1>
+            <li>Higher Price</li>
+            <li>Lower Price</li>
+            <li>Year</li>
+        </ul>
+    </section>
+    <!-- DISCOS / PRODUCTOS -->
+    <section id="items">
+        {{#each item}}
+        <li class="item" data-name="{{name}}">
+            <img src="{{imagePath}}" alt="product">
+            <div class="info">
+                <h2 class="title">{{name}}</h2>
+                <p class="description">{{description}}</p>
+                <h3 class="price">${{price}}</h3>
+            </div>
+            <i class="fas fa-shopping-cart"></i>
+        </li>
+        {{/each}}
+    </section>
+</section>
+<script src="./script.js"></script>
