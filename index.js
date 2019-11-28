@@ -21,7 +21,7 @@ app.engine('handlebars', hbs({
     ]
 }));
 
-MongoClient.connect('mongodb+srv://jerebushop-cdzyw.mongodb.net/products', {
+MongoClient.connect('mongodb+srv://jerebu-qxyha.mongodb.net/products', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         auth: {
@@ -57,5 +57,93 @@ app.get('/shop', (req, res) => {
     });
 });
 
+app.post('/shop/addToCart', (req, res) => {
+    let itemName = req.body.name;
+    const collection = db.collection('All');
+    collection.find({}).toArray((err, docs) => {
+        let item = docs.find((obj) => {
+            return obj.name == itemName;
+        });
+        db.collection('Cart').insertOne(item);
+    });
+    console.log('Added');
+});
+
+app.post('/shop/removeFromCart', (req, res) => {
+    let itemName = req.body.name;
+    const collection = db.collection('All');
+    collection.find({}).toArray((err, docs) => {
+        let item = docs.find((obj) => {
+            return obj.name == itemName;
+        });
+        db.collection('Cart').deleteOne(item);
+    });
+    console.log('Removed');
+});
+
+app.get('/cart', (req, res) => {
+    res.render('cart');
+});
+
+app.get('/cart/getdiscscart', (req, res) => {
+    const collection = db.collection('cartdiscs');
+    collection.find({}).toArray((err, docs) => {
+        res.json(docs);
+    });
+});
+
+app.post('/cart/removecart', (req, res) => {
+    let discname = req.body.disc;
+    const collection = db.collection('discs');
+    collection.find({}).toArray((err, docs) => {
+        let disc = docs.find((obj) => {
+            return obj.name == discname;
+        });
+        db.collection('cartdiscs').deleteOne(disc);
+    });
+    res.send('REMOVED');
+});
+
+app.get('/shop/updateItems', (req, res) => {
+    console.log(req.query.year);
+    let type = req.query.type;
+    let year = parseInt(req.query.year);
+    let price = parseFloat(req.query.price);
+    const collection = db.collection('All');
+    collection.find({}).toArray((err, docs) => {
+        let filteredItems = docs;
+        if (req.query.type != undefined) {
+            console.log('entra a type ****')
+            let filter = filteredItems.filter(item => item.type == type);
+            filteredItems = filter;
+        }
+        if (req.query.year != undefined) {
+            console.log('entra a year ****')
+            let filter = filteredItems.filter(item => item.year == year);
+            filteredItems = filter;
+        }
+        if (req.query.price != undefined) {
+            console.log('entra a price ****')
+            let filter = filteredItems.filter(item => item.price >= price);
+            filteredItems = filter;
+        }
+        res.json(filteredItems);
+    });
+});
+
+app.get('/checkout', (req, res) => {
+    const collection = db.collection('cartdiscs');
+    collection.find({}).toArray((err, docs) => {
+        let price = 0;
+        docs.forEach(element => {
+            price += element.price;
+        });
+        let discs_items = {
+            totalprice: price,
+            discs: docs,
+        }
+        res.render('checkout', discs_items);
+    });
+});
 
 app.listen(3000);

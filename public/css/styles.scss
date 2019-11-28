@@ -28,7 +28,7 @@ $shadow: #00000080;
 
 .title {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 17px;
     font-family: 'Alegreya Sans', sans-serif;
     font-weight: 800;
     text-decoration: none;
@@ -40,12 +40,17 @@ body {
     height: 100vh;
     background: $black;
     overflow-x: hidden;
+    padding-top: 52px;
 
     #navBar {
         width: 100%;
         height: 52px;
         padding: 0 calc(8.3% + 20px);
         border-bottom: solid 1px $white;
+        background: $black;
+        z-index: 999;
+        position: fixed;
+        top: 0;
 
         //Flexbox
         display: flex;
@@ -132,10 +137,14 @@ body {
                 }
                 li {
                     font-weight: 400;
-                    font-size: 13px;
-                    margin-bottom: 10px;
+                    font-size: 12px;
+                    padding: 5px 0;
                     text-decoration: underline;
                     cursor: pointer;
+
+                    &:hover {
+                        font-weight: 600;
+                    }
                 }
             }
         }
@@ -158,6 +167,7 @@ body {
                 margin-bottom: 20px;
                 border-radius: 5px;
                 position: relative;
+                cursor: pointer;
 
                 //Flexbox
                 display: flex;
@@ -203,5 +213,84 @@ body {
 
             }
         }
+    }
+
+    #cart {
+        width: 100%;
+        padding: 30px calc(8.3% + 20px);
+        .title {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        #items {
+            width: 100%;
+            height: 100%;
+
+            //Flexbox
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            .item {
+                background: $white;
+                max-width: 100%;
+                flex: calc(25% - 20px);
+                height: 140px;
+                padding: 20px;
+                margin-bottom: 20px;
+                margin-right: 20px;
+                border-radius: 5px;
+                position: relative;
+                cursor: pointer;
+
+                //Flexbox
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                * {
+                    color: $black;
+                }
+
+                img {
+                    height: 100%;
+                    margin-right: 30px;
+                }
+
+                .info {
+                    height: 100%;
+                    padding: 10px 0;
+
+                    //Flexbox
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: space-between;
+
+                    .title {
+                        font-size: 20px;
+                    }-size: 12px;
+                    }
+
+                    .price {
+                        font-size: 18px
+                    }
+                }
+
+                i {
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                }
+
+            }
+        
     }
 }
