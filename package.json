@@ -4,7 +4,6 @@
   "description": "Jerebu Eccomerce - By Jess",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
   },
   "author": "Jessica Rendón",
   "license": "ISC",
