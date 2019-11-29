@@ -184,11 +184,18 @@ body {
                         position: absolute;
                         content: '✔';
                         color: $white;
-                        padding: 20px;
+                        height: 40px;
+                        width: 40px;
                         border-radius: 20px;
                         background: #333;
-                        top: -10px;
-                        right: -10px;
+                        top: -20px;
+                        right: -20px;
+                        z-index: 999;
+                        
+                        //Flexbox
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                     }
                 }
                 * {
