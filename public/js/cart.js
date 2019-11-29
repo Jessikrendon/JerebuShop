@@ -6,19 +6,21 @@ fetch(url, {
     .catch(error => console.error('Error:', error))
     .then(items => getTotal(items));
 
-let totalprice = 0;
+let totalPrice = 0;
+let totalItems = 0;
 
 function getTotal(items) {
     console.log(items);
     if (items.length != 0) {
         items.forEach(item => {
             createitemCart(item);
-            totalprice += item.price;
+            totalPrice += item.price;
         });
+        totalItems = items.length;
     } else {
         createWarningMessage();
     }
-    document.querySelector('#cart .price').innerHTML = '(' + items.length + ' items) <span>$' + totalprice + '</span>'
+    document.querySelector('#cart .price').innerHTML = '(' + totalItems + ' items) <span>$' + totalPrice + '</span>'
 }
 
 function createWarningMessage() {
@@ -40,12 +42,12 @@ function getNewTotal(items) {
     if (items.length != 0) {
         items.forEach(item => {
             createitemCart(item);
-            totalprice += item.price;
+            totalPrice += item.price;
         });
     } else {
         createWarningMessage();
     }
-    document.querySelector('#cart .price').innerHTML = '(' + items.length + ' items) <span>$' + totalprice + '</span>'
+    document.querySelector('#cart .price').innerHTML = '(' + items.length + ' items) <span>$' + totalPrice + '</span>'
 }
 
 function createitemCart(item) {
@@ -67,6 +69,9 @@ function createitemCart(item) {
             .catch(error => console.error('Error:', error))
 
         updateItems();
+        totalItems --;
+        totalPrice -= item.price;
+        document.querySelector('#cart .price').innerHTML = '(' + totalItems + ' items) <span>$' + totalPrice.toFixed(2) + '</span>'
         li.remove();
     })
 

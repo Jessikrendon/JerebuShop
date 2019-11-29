@@ -45,6 +45,10 @@ body {
   padding-top: 52px;
 }
 
+body #home {
+  width: 100vw;
+}
+
 body #navBar {
   width: 100%;
   height: 52px;
@@ -293,6 +297,7 @@ body #cart #items {
   height: -moz-fit-content;
   height: fit-content;
   margin-bottom: 50px;
+  margin-right: -20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -378,7 +383,7 @@ body #cart #items i {
   z-index: 99;
 }
 
-body #cart form {
+body #cart div {
   width: 500px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -395,13 +400,13 @@ body #cart form {
           justify-content: space-between;
 }
 
-body #cart form label {
+body #cart div label {
   font-size: 12px;
   font-weight: 300;
   margin-bottom: 5px;
 }
 
-body #cart form input {
+body #cart div input {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -410,13 +415,22 @@ body #cart form input {
   border-radius: 10px;
 }
 
-body #cart form button {
+body #cart div a {
   padding: 10px 50px;
   margin-top: 40px;
+  background: #FFFFFF;
   color: #000000;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 600;
   font-family: 'Alegreya Sans', sans-serif;
+}
+
+body footer {
+  width: 100vw;
+}
+
+body footer #footer {
+  width: 100vw;
 }
 /*# sourceMappingURL=styles.css.map */

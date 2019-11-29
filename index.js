@@ -42,8 +42,8 @@ const client = new MongoClient(url);
 let db = null;
 
 app.get('/', (req, res) => {
-    //res.render('home');
-    res.redirect('shop')
+    res.render('home');
+    //res.redirect('shop')
 });
 
 app.get('/shop', (req, res) => {
