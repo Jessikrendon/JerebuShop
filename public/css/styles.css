@@ -219,6 +219,10 @@ body #shop #items .item {
           justify-content: flex-start;
 }
 
+body #shop #items .item.added {
+  border: solid 4px green;
+}
+
 body #shop #items .item * {
   color: #000000;
 }
@@ -278,9 +282,17 @@ body #cart p {
   margin-bottom: 20px;
 }
 
+body #cart .price {
+  margin-top: -50px;
+  float: right;
+}
+
 body #cart #items {
   width: 100%;
-  height: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -301,9 +313,10 @@ body #cart #items {
 body #cart #items .item {
   background: #FFFFFF;
   max-width: 100%;
-  -webkit-box-flex: calc(25% - 20px);
-      -ms-flex: calc(25% - 20px);
-          flex: calc(25% - 20px);
+  min-width: 30%;
+  -webkit-box-flex: calc(28% - 20px);
+      -ms-flex: calc(28% - 20px);
+          flex: calc(28% - 20px);
   height: 140px;
   padding: 20px;
   margin-bottom: 20px;
@@ -362,5 +375,48 @@ body #cart #items i {
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 99;
+}
+
+body #cart form {
+  width: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+body #cart form label {
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+body #cart form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: none;
+  border: solid 0.5px #FFFFFF;
+  border-radius: 10px;
+}
+
+body #cart form button {
+  padding: 10px 50px;
+  margin-top: 40px;
+  color: #000000;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Alegreya Sans', sans-serif;
 }
 /*# sourceMappingURL=styles.css.map */

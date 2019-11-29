@@ -1,33 +1,98 @@
-var url = '/cart/getCartItems';
+let url = '/getCartItems';
+
+fetch(url, {
+        method: 'GET', // or 'PUT'
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(items => getTotal(items));
+
+let totalprice = 0;
+
+function getTotal(items) {
+    console.log(items);
+    if (items.length != 0) {
+        items.forEach(item => {
+            createitemCart(item);
+            totalprice += item.price;
+        });
+    } else {
+        createWarningMessage();
+    }
+    document.querySelector('#cart .price').innerHTML = '(' + items.length + ' items) <span>$' + totalprice + '</span>'
+}
+
+function createWarningMessage() {
+    console.log("oh no");
+}
+
+function updateItems() {
+
+    let url = '/cart/getCartItems';
     fetch(url, {
             method: 'GET', // or 'PUT'
         }).then(res => res.json())
         .catch(error => console.error('Error:', error))
-        .then(discitems => evaluateDiscItems(discitems));
+        .then(items => getTotal(items));
+}
 
-    var totalprice = 0;
-
-    function evaluateDiscItems(discitems) {
-        console.log(discitems);
-        if (discitems.length != 0) {
-            discitems.forEach(disc => {
-                createDiscCart(disc);
-                totalprice += disc.price;
-            });
-        } else {
-            createWarningMessage();
-        }
-        document.querySelector('.value__desc__itemsvalue').innerHTML = '(' + discitems.length + ' items) <span>$' + totalprice + '</span>'
+function getNewTotal(items) {
+    console.log(items);
+    if (items.length != 0) {
+        items.forEach(item => {
+            createitemCart(item);
+            totalprice += item.price;
+        });
+    } else {
+        createWarningMessage();
     }
+    document.querySelector('#cart .price').innerHTML = '(' + items.length + ' items) <span>$' + totalprice + '</span>'
+}
 
-    function createWarningMessage() {
-        var div = document.createElement('div');
-        div.setAttribute('class', 'warning');
+function createitemCart(item) {
 
-        var p = document.createElement('p');
-        p.setAttribute('class', 'warning__text');
-        p.innerHTML = '<strong>UPS!</strong> you have not added any disc to your shopping cart.<br>Go to the Discography section and select the discs you want to buy.'
+    let li = document.createElement('li');
+    li.setAttribute('class', 'item');
+    li.setAttribute('dataname', item.name);
 
-        div.appendChild(p);
-        document.querySelector('.cartitems').appendChild(div);
-    }
+    li.addEventListener('click', () => {
+
+        fetch('/removeFromCart?', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'name=' + item.name,
+            })
+            .then(res => res.text())
+            .catch(error => console.error('Error:', error))
+
+        updateItems();
+        li.remove();
+    })
+
+    let img = document.createElement('img');
+    img.setAttribute('src', '../' + item.imagePath);
+    img.setAttribute('alt', item.name + ' image');
+
+    let div = document.createElement('div');
+    div.setAttribute('class', 'info');
+
+    let h2 = document.createElement('h2');
+    h2.innerHTML = item.name;
+
+    let h3 = document.createElement('h3');
+    h3.setAttribute('class', 'price');
+    h3.innerHTML = '$' + item.price;
+
+    let i = document.createElement('i');
+    i.setAttribute('class', 'fas fa-times');
+
+    div.appendChild(h2);
+    div.appendChild(h3);
+
+    li.appendChild(img);
+    li.appendChild(div);
+    li.appendChild(i);
+
+    document.querySelector('#items').appendChild(li);
+}

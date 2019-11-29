@@ -93,6 +93,30 @@ function createItem(item) {
     li.appendChild(div);
     li.appendChild(i);
 
+    let url = '';
+    lastItemSelected = '';
+
+    li.addEventListener('click', () => {
+        console.log("holaaaa")
+        if (li.className === 'item') {
+            url = '/addToCart?';
+            li.className = 'item added';
+        } else {
+            url = '/removeFromCart?';
+            li.className = 'item';
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'name='+item.name,
+          })
+          .then(res => res.text())
+          .catch(error => console.error('Error:', error))
+    });
+
     document.querySelector('#items').appendChild(li);
 }
 
@@ -103,10 +127,10 @@ function createItem(item) {
     e.addEventListener('click', () => {
         itemName = e.children[1].children[0].innerHTML;
         if (e.className === 'item') {
-            url = '/shop/addToCart?';
+            url = '/addToCart?';
             e.className = 'item added';
         } else {
-            url = '/shop/removeFromCart?';
+            url = '/removeFromCart?';
             e.className = 'item';
         }
 
@@ -120,5 +144,4 @@ function createItem(item) {
           .then(res => res.text())
           .catch(error => console.error('Error:', error))
     });
-
 });

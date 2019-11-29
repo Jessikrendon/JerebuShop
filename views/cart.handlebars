@@ -1,39 +1,24 @@
 <section id="cart">
     <h1 class="title">Checkout</h1>
     <p>This are the products you added to the shoping cart</p>
+    <h1 class="price"></h1>
     <ul id="items">
-        <li class="item" data-name="nombre">
-            <img src="/images/St-seal.jpg" alt="nombre image">
-            <div class="info">
-                <h2 class="title">Nombre</h2>
-                <h3 class="price">$12</h3>
-            </div>
-            <i class="fas fa-times"></i>
-        </li>
-        <li class="item" data-name="nombre">
-            <img src="/images/St-seal.jpg" alt="nombre image">
-            <div class="info">
-                <h2 class="title">Nombre</h2>
-                <h3 class="price">$12</h3>
-            </div>
-            <i class="fas fa-times"></i>
-        </li>
-        <li class="item" data-name="nombre">
-            <img src="/images/St-seal.jpg" alt="nombre image">
-            <div class="info">
-                <h2 class="title">Nombre</h2>
-                <h3 class="price">$12</h3>
-            </div>
-            <i class="fas fa-times"></i>
-        </li>
-        <li class="item" data-name="nombre">
-            <img src="/images/St-seal.jpg" alt="nombre image">
-            <div class="info">
-                <h2 class="title">Nombre</h2>
-                <h3 class="price">$12</h3>
-            </div>
-            <i class="fas fa-times"></i>
-        </li>
-        
     </ul>
+
+    <form action="/checkout">
+        <h1 class="title">Fill this data to make your order</h1>
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+
+        <label for="name">Full Name</label>
+        <input type="text" name="name" required>
+
+        <label for="city">City</label>
+        <input type="text" name="city" required>
+        
+        <button>Order Now</button>
+    </form>
 </section>
+
+
+<script src="/js/cart.js"></script>

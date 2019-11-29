@@ -57,7 +57,7 @@ app.get('/shop', (req, res) => {
     });
 });
 
-app.post('/shop/addToCart', (req, res) => {
+app.post('/addToCart', (req, res) => {
     let itemName = req.body.name;
     const collection = db.collection('All');
     collection.find({}).toArray((err, docs) => {
@@ -69,7 +69,7 @@ app.post('/shop/addToCart', (req, res) => {
     console.log('Added');
 });
 
-app.post('/shop/removeFromCart', (req, res) => {
+app.post('/removeFromCart', (req, res) => {
     let itemName = req.body.name;
     const collection = db.collection('All');
     collection.find({}).toArray((err, docs) => {
@@ -85,23 +85,12 @@ app.get('/cart', (req, res) => {
     res.render('cart');
 });
 
-app.get('/cart/getdiscscart', (req, res) => {
-    const collection = db.collection('cartdiscs');
+app.get('/getCartItems', (req, res) => {
+    const collection = db.collection('Cart');
     collection.find({}).toArray((err, docs) => {
         res.json(docs);
     });
-});
-
-app.post('/cart/removecart', (req, res) => {
-    let discname = req.body.disc;
-    const collection = db.collection('discs');
-    collection.find({}).toArray((err, docs) => {
-        let disc = docs.find((obj) => {
-            return obj.name == discname;
-        });
-        db.collection('cartdiscs').deleteOne(disc);
-    });
-    res.send('REMOVED');
+    console.log('getting cart items');
 });
 
 app.get('/shop/updateItems', (req, res) => {
